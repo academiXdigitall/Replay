@@ -1,8 +1,4 @@
-You're right — you want the **literal raw contents of `README.md`**, without the writing-block formatting interfering with copy/paste.
 
- Here it is. Copy everything inside the code block into `README.md`:
-
-````
 # 🔄 Replay
 
 > A time machine for web applications.
