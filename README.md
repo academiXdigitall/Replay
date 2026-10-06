@@ -138,8 +138,8 @@ Order Creation Failed ❌
 
  Replay aims to make debugging production issues as simple as:
 
- **Record → Rewind → Replay → Diagnose → Fix**
-
 ```
+
+ **Record → Rewind → Replay → Diagnose → Fix**
 
 ```
