@@ -1,0 +1,2 @@
+# Architecture Overview
+Replay uses a decoupled event-sourcing model where browser SDKs capture semantic actions and flush them via HTTP beacons to a Node/Express ingestion pipeline backed by PostgreSQL.

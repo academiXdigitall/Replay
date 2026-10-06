@@ -140,6 +140,6 @@ Order Creation Failed ❌
 
 ```
 
- **Record → Rewind → Replay → Diagnose → Fix**
+ Record → Rewind → Replay → Diagnose → Fix
 
 ```

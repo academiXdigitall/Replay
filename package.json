@@ -1,0 +1,14 @@
+{
+  "name": "replay",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "server",
+    "sdk"
+  ],
+  "scripts": {
+    "dev:server": "cd server && npm run dev",
+    "dev:dashboard": "cd apps/dashboard && npm run dev",
+    "dev:demo": "cd apps/demo-app && npm run dev"
+  }
+}
