@@ -2,17 +2,34 @@ import express from 'express';
 import http from 'http';
 import cors from 'cors';
 import { setupWebSocket } from './websocket/socketServer';
-import { createApiRouter } from './routes/apiRoutes';
+import { initDb } from './db/pool';
+import { createEventController } from './controllers/eventController';
+import { createAuthMiddleware } from './middleware/authMiddleware';
 
-const app = express();
-const server = http.createServer(app);
-const io = setupWebSocket(server);
+async function main() {
+  const app = express();
+  const server = http.createServer(app);
+  const io = setupWebSocket(server);
 
-app.use(express.json());
-app.use(cors());
+  app.use(express.json());
+  app.use(cors());
 
-app.use('/api', createApiRouter(io));
+  // Initialize SQLite Database
+  const db = await initDb();
 
-server.listen(4000, () => {
-  console.log('⚡ Replay Server running on port 4000');
-});
+  // Routes
+  const ingestEvents = createEventController(db, io);
+  const verifyApiKey = createAuthMiddleware(db);
+
+  app.post('/api/events', verifyApiKey, ingestEvents);
+  
+  app.post('/api/checkout', (req, res) => {
+    res.status(500).json({ error: 'Database timeout during order creation' });
+  });
+
+  server.listen(4000, () => {
+    console.log('⚡ Replay Server running on port 4000 with SQLite');
+  });
+}
+
+main().catch(console.error);
