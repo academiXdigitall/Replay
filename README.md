@@ -1,28 +1,28 @@
-🔄 Replay
+You're right — you want the **literal raw contents of `README.md`**, without the writing-block formatting interfering with copy/paste.
 
-Replay is a developer debugging and observability platform that acts like a time machine for web applications.
+ Here it is. Copy everything inside the code block into `README.md`:
 
-When a critical error occurs, Replay automatically records the important events leading up to the failure, alerts the developer, and allows them to rewind the session, reproduce the issue, and understand what went wrong.
+````
+# 🔄 Replay
 
-✨ Features
+> A time machine for web applications.
 
-Automatic Error Detection — Detect critical application failures in real time.
+Replay is a developer debugging and observability platform that records important application events, detects critical failures, and lets developers rewind and replay what happened.
 
-Session Timeline — See exactly what happened before and during the failure.
+## ✨ Features
 
-Time Travel / Rewind — Jump back to the application state before the error.
+- 🚨 **Automatic Error Detection** — Detect critical application failures in real time.
+- 🕐 **Session Timeline** — See exactly what happened before and during a failure.
+- ⏪ **Time Travel / Rewind** — Go back to the state before an error occurred.
+- ▶️ **Event Replay** — Reproduce the same sequence of events.
+- 💳 **Impact Detection** — Detect issues such as successful payment but failed order creation.
+- 🔔 **Instant Alerts** — Notify developers when critical failures occur.
+- 🤖 **AI Diagnosis** — Analyze failures and suggest probable causes and fixes.
+- 📊 **Developer Dashboard** — Investigate errors, sessions, timelines, and system status.
 
-Event Replay — Reproduce the same sequence of actions.
+## ⚙️ How It Works
 
-Impact Detection — Identify issues such as successful payment but failed order creation.
-
-Instant Alerts — Notify admins about critical failures automatically.
-
-AI Diagnosis — Analyze the failure and suggest the probable cause and potential fix.
-
-Developer Dashboard — Investigate errors, affected sessions, timelines, and system status from one place.
-
-⚙️ How It Works
+```text
 User interacts with Web App
           ↓
       Replay SDK
@@ -35,16 +35,18 @@ User interacts with Web App
           ↓
    Error Detection
           ↓
-   🚨 Admin Alert
+      🚨 Alert
           ↓
    Developer Dashboard
           ↓
    Rewind → Replay → Diagnose → Fix
+````
 
-Example
+ ## 🧪 Example
 
-A customer purchases a product:
+ A customer purchases a product:
 
+```
 Product Added
       ↓
 Checkout Started
@@ -52,57 +54,96 @@ Checkout Started
 Payment Successful ✅
       ↓
 Order Creation Failed ❌
+```
 
+ Replay detects the inconsistent transaction and alerts the developer:
 
-Replay detects the inconsistent transaction and alerts the developer:
+ > 🚨 Customer charged Rs. 1,500 but order creation failed.
 
-🚨 Customer charged Rs. 1,500 but order creation failed.
+ The developer can open the session, rewind to the relevant point, replay the sequence, and investigate the failure.
 
-The developer can open the session, rewind to the relevant point, replay the sequence, and inspect the failure. AI can then provide a probable cause and suggested fix.
+ AI can then analyze the failure and provide a probable cause and suggested fix.
 
-🛠️ Tech Stack
-Frontend
+ ## 🏗️ Architecture
 
-React
+```
+┌──────────────────────┐
+│     Customer App     │
+│    React Web App     │
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│      Replay SDK      │
+│  Events • Errors     │
+│  State Changes       │
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│    Node + Express    │
+│     Replay Engine    │
+└──────────┬───────────┘
+           │
+      ┌────┴─────┐
+      ▼          ▼
+┌──────────┐ ┌──────────┐
+│PostgreSQL│ │AI Engine │
+└──────────┘ └──────────┘
+      │
+      ▼
+┌──────────────────────┐
+│ Developer Dashboard  │
+│ Alerts • Timeline    │
+│ Replay • Diagnosis   │
+└──────────────────────┘
+```
 
-Tailwind CSS
+ ## 🛠️ Tech Stack
 
-React Flow / visualization library
+ ### Frontend
 
-Backend
+ - React
+- Tailwind CSS
+- React Flow
 
-Node.js
+ ### Backend
 
-Express.js
+ - Node.js
+- Express.js
+- Socket.IO
 
-WebSockets / Socket.IO
+ ### Database
 
-Database
+ - PostgreSQL
+- JSONB for event and state data
 
-PostgreSQL
+ ### AI
 
-JSONB for event/state data
+ - LLM API for error analysis and fix suggestions
 
-AI
+ ### Core Technology
 
-LLM API for error analysis and fix suggestions
+ - Custom Replay SDK
+- Event tracking
+- State snapshots
+- Replay engine
+- Real-time error detection
 
-Core Technology
+ ## 🎯 Goal
 
-Custom Replay SDK
+ Replay helps developers answer three questions quickly:
 
-Event tracking
+ 1. **What happened?**
+2. **Why did it happen?**
+3. **How can I reproduce and fix it?**
 
-Event/state timeline
+ ## 🚀 Vision
 
-Replay engine
+ Replay aims to make debugging production issues as simple as:
 
-Real-time error detection
+ **Record → Rewind → Replay → Diagnose → Fix**
 
-🎯 Goal
+```
 
-Replay helps developers answer three questions quickly:
-
-What happened?
-Why did it happen?
-How can I reproduce and fix it
+```
