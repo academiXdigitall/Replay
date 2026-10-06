@@ -105,4 +105,4 @@ Replay helps developers answer three questions quickly:
 
 What happened?
 Why did it happen?
-How can I reproduce and fix it?
+How can I reproduce and fix it
