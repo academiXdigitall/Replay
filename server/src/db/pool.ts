@@ -2,17 +2,21 @@ import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 import path from 'path';
 
+let dbInstance: any = null;
+
 export async function initDb() {
-  const db = await open({
+  if (dbInstance) return dbInstance;
+
+  dbInstance = await open({
     filename: path.join(__dirname, '../../replay.db'),
     driver: sqlite3.Database
   });
 
   // Enable foreign keys
-  await db.exec('PRAGMA foreign_keys = ON;');
+  await dbInstance.exec('PRAGMA foreign_keys = ON;');
 
   // Create tables
-  await db.exec(`
+  await dbInstance.exec(`
     CREATE TABLE IF NOT EXISTS applications (
         id TEXT PRIMARY KEY,
         name TEXT NOT NULL,
@@ -51,11 +55,17 @@ export async function initDb() {
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY(session_id) REFERENCES sessions(id) ON DELETE CASCADE
     );
+  `);
 
-    -- Seed default demo application if not exists
+  // Seed or ensure correct demo application credentials
+  await dbInstance.run(`
     INSERT OR IGNORE INTO applications (id, name, api_key) 
     VALUES ('11111111-1111-1111-1111-111111111111', 'ElectroShop Demo', 'demo_key_123');
   `);
+  
+  await dbInstance.run(`
+    UPDATE applications SET api_key = 'demo_key_123' WHERE id = '11111111-1111-1111-1111-111111111111';
+  `);
 
-  return db;
+  return dbInstance;
 }

@@ -9,11 +9,18 @@ const sdk = new ReplaySDK({
 
 export default function App() {
   const handleBuy = async () => {
+    // Track events with explicit API key header if needed
     sdk.track('CHECKOUT_STARTED', { cartId: 'cart_99' });
     sdk.track('PAYMENT_SUCCESS', { amount: 1500, currency: 'NPR' });
 
     try {
-      const res = await fetch('http://localhost:4000/api/checkout', { method: 'POST' });
+      const res = await fetch('http://localhost:4000/api/checkout', { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': 'demo_key_123'
+        }
+      });
       if (!res.ok) throw new Error('Database timeout during order creation');
     } catch (err: any) {
       sdk.track('ORDER_FAILED', { error: err.message });
